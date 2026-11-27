@@ -25,4 +25,8 @@ object ApiClient {
     val ticketsApi: TicketsApi by lazy {
         retrofit.create(TicketsApi::class.java)
     }
+
+    val catalogApi: CatalogApi by lazy {
+        retrofit.create(CatalogApi::class.java)
+    }
 }

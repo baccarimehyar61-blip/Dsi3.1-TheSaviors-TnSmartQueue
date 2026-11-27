@@ -1,4 +1,3 @@
-
 package com.example.tunisiasmartqueue.tickets
 
 import android.os.Bundle
@@ -42,10 +41,15 @@ class MesTickets : Fragment(R.layout.ecran_mes_tickets) {
     }
 
     private fun chargerTickets() {
-        val token = GestionAuth.token(requireContext())
+
+        val token = GestionAuth.getToken(requireContext())
 
         if (token.isNullOrEmpty()) {
-            Toast.makeText(requireContext(), "Session expirée. Reconnectez-vous.", Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                requireContext(),
+                "Session expirée. Reconnectez-vous.",
+                Toast.LENGTH_LONG
+            ).show()
             return
         }
 
@@ -59,7 +63,8 @@ class MesTickets : Fragment(R.layout.ecran_mes_tickets) {
                     if (!isAdded) return
 
                     if (response.isSuccessful) {
-                        afficherTickets(response.body() ?: emptyList())
+                        val tickets = response.body() ?: emptyList()
+                        afficherTickets(tickets)
                     } else {
                         Toast.makeText(
                             requireContext(),
@@ -85,12 +90,15 @@ class MesTickets : Fragment(R.layout.ecran_mes_tickets) {
     }
 
     private fun afficherTickets(tickets: List<TicketResponse>) {
+
         conteneur.removeAllViews()
 
         tvTotal.text = tickets.size.toString()
+
         tvWaiting.text = tickets.count {
             it.status == "EN_ATTENTE"
         }.toString()
+
         tvDone.text = tickets.count {
             it.status == "TERMINE"
         }.toString()
@@ -99,6 +107,7 @@ class MesTickets : Fragment(R.layout.ecran_mes_tickets) {
             if (tickets.isEmpty()) View.VISIBLE else View.GONE
 
         for (ticket in tickets) {
+
             val carte = layoutInflater.inflate(
                 R.layout.ligne_ticket,
                 conteneur,
@@ -118,18 +127,33 @@ class MesTickets : Fragment(R.layout.ecran_mes_tickets) {
                 "Temps estimé : ${ticket.estimatedTime} min"
 
             carte.findViewById<TextView>(R.id.tvTDate).text =
-                ticket.createdAt.replace("T", " à ")
+                ticket.createdAt.replace("T", " à ").substringBefore(".")
 
             val statut = carte.findViewById<TextView>(R.id.tvTStatus)
-            statut.text = ticket.status
+
+            statut.text = when (ticket.status) {
+                "EN_ATTENTE" -> "En attente"
+                "APPELE" -> "Appelé"
+                "EN_COURS" -> "En cours"
+                "TERMINE" -> "Terminé"
+                "ANNULE" -> "Annulé"
+                "ABSENT" -> "Absent"
+                else -> ticket.status
+            }
 
             val lienSuivi = carte.findViewById<TextView>(R.id.tvTFollow)
-            lienSuivi.visibility =
-                if (ticket.status == "EN_ATTENTE") View.VISIBLE else View.GONE
 
-            if (ticket.status == "EN_ATTENTE") {
+            val enCours = ticket.status == "EN_ATTENTE" ||
+                    ticket.status == "APPELE" ||
+                    ticket.status == "EN_COURS"
+
+            lienSuivi.visibility =
+                if (enCours) View.VISIBLE else View.GONE
+
+            if (enCours) {
                 lienSuivi.setOnClickListener {
-                    (requireActivity() as MainActivity).goTo(R.id.nav_tracking)
+                    (requireActivity() as MainActivity)
+                        .goTo(R.id.nav_tracking)
                 }
             }
 
