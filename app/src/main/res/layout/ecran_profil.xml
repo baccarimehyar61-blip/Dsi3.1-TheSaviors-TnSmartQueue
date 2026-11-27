@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F7FA"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Header -->
+
+        <TextView
+            android:id="@+id/tvBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="← Tableau de bord"
+            android:textColor="#2563EB"
+            android:textSize="15sp"
+            android:paddingBottom="20dp"
+            android:clickable="true"
+            android:focusable="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ESPACE CLIENT"
+            android:textColor="#2563EB"
+            android:textStyle="bold"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mon compte"
+            android:textColor="#172554"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Consultez et gérez vos informations personnelles."
+            android:textColor="#64748B"
+            android:textSize="14sp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="20dp"/>
+
+        <!-- Profile card -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="20dp">
+
+            <!-- User information -->
+
+            <TextView
+                android:id="@+id/tvHello"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bonjour 👋"
+                android:textColor="#172554"
+                android:textSize="22sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/tvEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="email@example.com"
+                android:textColor="#64748B"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:id="@+id/tvRole"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Type de compte"
+                android:textColor="#2563EB"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp"/>
+
+            <!-- Messages -->
+
+            <TextView
+                android:id="@+id/tvMessage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:textColor="#16A34A"
+                android:textSize="14sp"
+                android:padding="10dp"
+                android:layout_marginTop="15dp"/>
+
+            <!-- Personal information -->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Informations personnelles"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                android:textColor="#172554"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="15dp"/>
+
+            <EditText
+                android:id="@+id/etFirstName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Prénom"
+                android:inputType="textPersonName"
+                android:enabled="false"/>
+
+            <EditText
+                android:id="@+id/etLastName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nom"
+                android:inputType="textPersonName"
+                android:enabled="false"/>
+
+            <EditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Adresse e-mail"
+                android:enabled="false"
+                android:inputType="textEmailAddress"/>
+
+            <EditText
+                android:id="@+id/etPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Téléphone"
+                android:inputType="phone"
+                android:enabled="false"/>
+
+            <!-- Account information -->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Informations du compte"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                android:textColor="#172554"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="15dp"/>
+
+            <TextView
+                android:id="@+id/tvCreatedAt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date de création : —"
+                android:textColor="#64748B"
+                android:textSize="14sp"/>
+
+            <!-- Edit button -->
+
+            <Button
+                android:id="@+id/btnEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Modifier mon profil"
+                android:layout_marginTop="25dp"/>
+
+            <!-- Save and cancel buttons -->
+
+            <LinearLayout
+                android:id="@+id/layoutActions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:layout_marginTop="15dp">
+
+                <Button
+                    android:id="@+id/btnSave"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Enregistrer les modifications"/>
+
+                <Button
+                    android:id="@+id/btnCancel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Annuler"/>
+
+            </LinearLayout>
+
+            <!-- Loading -->
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:layout_marginTop="15dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

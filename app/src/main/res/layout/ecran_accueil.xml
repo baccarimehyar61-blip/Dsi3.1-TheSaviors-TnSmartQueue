@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Page « Accueil » : 4 cartes empilées dans un ScrollView (page qui défile) -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <!-- Colonne verticale qui contient les 4 cartes -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- ============ CARTE 1 : Bienvenue (fond noir) ============ -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="#111111"
+            app:cardCornerRadius="14dp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <!-- Petit titre rouge -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:letterSpacing="0.15"
+                    android:text="ESPACE CLIENT"
+                    android:textColor="#E32636"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+
+                <!-- Message de bienvenue -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Bienvenue sur votre espace !"
+                    android:textColor="#FFFFFF"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+                <!-- Phrase d'explication -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Gérez vos réservations et suivez votre file d'attente en temps réel."
+                    android:textColor="#BBBBBB"
+                    android:textSize="13sp" />
+
+                <!-- Bouton pour prendre un ticket -->
+                <Button
+                    android:id="@+id/btnTakeTicket"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="16dp"
+                    android:backgroundTint="@color/tsq_red"
+                    android:text="+ Prendre un ticket"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ============ CARTE 2 : Mon ticket actuel ============ -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/tsq_line"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="18dp">
+
+                <!-- Ligne du haut : titre à gauche, statut à droite -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <!-- Le titre prend toute la place restante (weight = 1) -->
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Mon ticket actuel"
+                        android:textColor="@color/tsq_dark"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <!-- Étiquette du statut (« En attente ») : cachée tant qu'il n'y a pas de ticket -->
+                    <TextView
+                        android:id="@+id/tvStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_pill"
+                        android:backgroundTint="#FFF0F1"
+                        android:textColor="#E32636"
+                        android:textSize="11sp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <!-- Sous-titre -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Informations sur votre réservation active"
+                    android:textColor="@color/tsq_muted"
+                    android:textSize="12sp" />
+
+                <!-- CAS A : il y a un ticket actif (caché par défaut) -->
+                <LinearLayout
+                    android:id="@+id/layoutActive"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <!-- Petite carte grise avec le numéro et les détails -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardBackgroundColor="#FAFAFA"
+                        app:cardCornerRadius="10dp"
+                        app:cardElevation="0dp"
+                        app:strokeWidth="0dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:letterSpacing="0.1"
+                                android:text="NUMÉRO DE TICKET"
+                                android:textColor="@color/tsq_muted"
+                                android:textSize="10sp"
+                                android:textStyle="bold" />
+
+                            <!-- Le numéro en grand (ex : A-482), écrit par le Kotlin -->
+                            <TextView
+                                android:id="@+id/tvTicketNumber"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="6dp"
+                                android:textColor="#E32636"
+                                android:textSize="38sp"
+                                android:textStyle="bold" />
+
+                            <!-- Le nom de l'agence -->
+                            <TextView
+                                android:id="@+id/tvAgency"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="#777777"
+                                android:textSize="12sp" />
+
+                            <!-- Trait de séparation -->
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="14dp"
+                                android:layout_marginBottom="14dp"
+                                android:background="@color/tsq_line" />
+
+                            <!-- 3 colonnes côte à côte : service / personnes devant / temps estimé -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <!-- Colonne 1 : service (un peu plus large : weight 1.2) -->
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1.2"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Service demandé"
+                                        android:textColor="@color/tsq_muted"
+                                        android:textSize="11sp" />
+
+                                    <TextView
+                                        android:id="@+id/tvService"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="6dp"
+                                        android:textColor="@color/tsq_dark"
+                                        android:textSize="13sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+
+                                <!-- Colonne 2 : personnes devant vous -->
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Personnes devant vous"
+                                        android:textColor="@color/tsq_muted"
+                                        android:textSize="11sp" />
+
+                                    <TextView
+                                        android:id="@+id/tvPeopleAhead"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="6dp"
+                                        android:textColor="@color/tsq_dark"
+                                        android:textSize="13sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+
+                                <!-- Colonne 3 : temps estimé -->
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Temps estimé"
+                                        android:textColor="@color/tsq_muted"
+                                        android:textSize="11sp" />
+
+                                    <TextView
+                                        android:id="@+id/tvWaiting"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="6dp"
+                                        android:textColor="@color/tsq_dark"
+                                        android:textSize="13sp"
+                                        android:textStyle="bold" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Ligne « Progression de la file » + pourcentage à droite -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Progression de la file"
+                            android:textColor="@color/tsq_dark"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvProgress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#E32636"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <!-- Barre de progression (de 0 à 100) -->
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="9dp"
+                        android:layout_marginTop="10dp"
+                        android:max="100"
+                        android:progressBackgroundTint="#EEEEEE"
+                        android:progressTint="#E32636" />
+
+                    <!-- Message d'encouragement -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Votre tour approche ! Restez à proximité de l'agence."
+                        android:textColor="@color/tsq_muted"
+                        android:textSize="11sp" />
+
+                    <!-- Lien vers l'écran de suivi -->
+                    <TextView
+                        android:id="@+id/tvTracking"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:padding="4dp"
+                        android:text="Voir le suivi détaillé →"
+                        android:textColor="#E32636"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- CAS B : pas de ticket actif (affiché par défaut) -->
+                <LinearLayout
+                    android:id="@+id/layoutEmpty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="8dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Aucun ticket actif"
+                        android:textColor="@color/tsq_dark"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        android:text="Vous n'avez pas encore de réservation en attente."
+                        android:textColor="@color/tsq_muted"
+                        android:textSize="12sp" />
+
+                    <Button
+                        android:id="@+id/btnEmptyTake"
+                        android:layout_width="wrap_content"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="14dp"
+                        android:backgroundTint="@color/tsq_red"
+                        android:text="Prendre un ticket"
+                        android:textColor="#FFFFFF" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ============ CARTE 3 : Accès rapide ============ -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/tsq_line"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="18dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Accès rapide"
+                    android:textColor="@color/tsq_dark"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Accédez facilement à vos services"
+                    android:textColor="@color/tsq_muted"
+                    android:textSize="12sp" />
+
+                <!-- Conteneur VIDE : le code Kotlin y ajoute les 5 lignes d'accès rapide -->
+                <LinearLayout
+                    android:id="@+id/quickContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="vertical" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ============ CARTE 4 : Historique récent ============ -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/tsq_line"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="18dp">
+
+                <!-- Ligne du haut : titre à gauche, « Voir tout » à droite -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Historique récent"
+                        android:textColor="@color/tsq_dark"
+                        android:textSize="17sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvSeeAll"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="4dp"
+                        android:text="Voir tout →"
+                        android:textColor="#E32636"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Vos dernières réservations"
+                    android:textColor="@color/tsq_muted"
+                    android:textSize="12sp" />
+
+                <!-- Conteneur VIDE : le code Kotlin y ajoute les 3 derniers tickets -->
+                <LinearLayout
+                    android:id="@+id/historyContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical" />
+
+                <!-- Message affiché s'il n'y a aucun ticket (caché par défaut) -->
+                <TextView
+                    android:id="@+id/tvEmptyHistory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Aucun historique disponible pour le moment."
+                    android:textColor="@color/tsq_muted"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+</ScrollView>

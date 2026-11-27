@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Une ligne de l'historique récent : un ticket, suivi d'un trait de séparation -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!-- Le contenu de la ligne : infos à gauche, statut et date à droite -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp">
+
+        <!-- Partie gauche : le numéro et le service l'un sous l'autre -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- Numéro du ticket en gras (ex : A-482), écrit par le Kotlin -->
+            <TextView
+                android:id="@+id/tvHistNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/tsq_dark"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <!-- Nom du service en gris, écrit par le Kotlin -->
+            <TextView
+                android:id="@+id/tvHistService"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/tsq_muted"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- Partie droite : le statut et la date, alignés à droite -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:orientation="vertical">
+
+            <!-- Étiquette du statut : sa couleur est choisie par le Kotlin -->
+            <TextView
+                android:id="@+id/tvHistStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_pill"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+
+            <!-- Date du ticket, écrite par le Kotlin -->
+            <TextView
+                android:id="@+id/tvHistDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/tsq_muted"
+                android:textSize="11sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Trait de séparation gris clair sous la ligne -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#F0F0F0" />
+</LinearLayout>

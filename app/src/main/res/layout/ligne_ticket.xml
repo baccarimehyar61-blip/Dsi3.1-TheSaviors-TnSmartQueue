@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Une carte de ticket dans la liste « Mes tickets » -->
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    app:cardBackgroundColor="#FFFFFF"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="0dp"
+    app:strokeColor="@color/tsq_line"
+    app:strokeWidth="1dp">
+
+    <!-- Contenu de la carte : les éléments sont empilés de haut en bas -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Ligne du haut : le numéro à gauche, le statut à droite -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <!-- Numéro du ticket en grand et en rouge (ex : A-482), écrit par le Kotlin -->
+            <TextView
+                android:id="@+id/tvTNumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="#E32636"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <!-- Étiquette du statut : sa couleur est choisie par le Kotlin -->
+            <TextView
+                android:id="@+id/tvTStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_pill"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Établissement et service (ex : « La Poste · Taxes »), écrits par le Kotlin -->
+        <TextView
+            android:id="@+id/tvTService"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:textColor="@color/tsq_dark"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <!-- Agence et adresse, écrites par le Kotlin -->
+        <TextView
+            android:id="@+id/tvTAgency"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/tsq_muted"
+            android:textSize="12sp" />
+
+        <!-- Trait de séparation -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:background="@color/tsq_line" />
+
+        <!-- Personnes devant et temps estimé, écrits par le Kotlin -->
+        <TextView
+            android:id="@+id/tvTInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#555555"
+            android:textSize="12sp" />
+
+        <!-- Date et heure de création, écrites par le Kotlin -->
+        <TextView
+            android:id="@+id/tvTDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/tsq_muted"
+            android:textSize="12sp" />
+
+        <!-- Lien « Suivre mon ticket » : caché, affiché seulement pour un ticket « En attente » -->
+        <TextView
+            android:id="@+id/tvTFollow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:padding="4dp"
+            android:text="Suivre mon ticket →"
+            android:textColor="#E32636"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

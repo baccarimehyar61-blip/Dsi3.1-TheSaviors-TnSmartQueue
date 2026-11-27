@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Page « Suivi de la file » : une carte pour le ticket actif, ou un message s'il n'y en a pas -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <!-- Colonne verticale : les éléments sont empilés de haut en bas -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Titre de la page -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Suivi de la file"
+            android:textColor="@color/tsq_dark"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <!-- Phrase d'explication -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="16dp"
+            android:text="Suivez votre position et le temps d'attente"
+            android:textColor="@color/tsq_muted"
+            android:textSize="13sp" />
+
+        <!-- ============ CAS A : il y a un ticket actif (carte cachée par défaut) ============ -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardTrack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/tsq_line"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="18dp">
+
+                <!-- Ligne du haut : « Ticket actif » à gauche, statut à droite -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Ticket actif"
+                        android:textColor="@color/tsq_dark"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <!-- Étiquette du statut (« En attente »), écrite par le Kotlin -->
+                    <TextView
+                        android:id="@+id/tvTrStatus"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_pill"
+                        android:backgroundTint="#FFF3E0"
+                        android:textColor="#B45309"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Le numéro du ticket en très grand, centré -->
+                <TextView
+                    android:id="@+id/tvTrNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:gravity="center"
+                    android:textColor="#E32636"
+                    android:textSize="52sp"
+                    android:textStyle="bold" />
+
+                <!-- Petit libellé sous le numéro -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:letterSpacing="0.1"
+                    android:text="VOTRE NUMÉRO"
+                    android:textColor="@color/tsq_muted"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+
+                <!-- Trait de séparation -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="12dp"
+                    android:background="@color/tsq_line" />
+
+                <!--- Détails : une ligne par information (libellé à gauche, valeur à droite)  -->
+
+                <!-- Ligne : Établissement -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Établissement"
+                        android:textColor="@color/tsq_muted"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvTrEst"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/tsq_dark"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Ligne : Agence -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Agence"
+                        android:textColor="@color/tsq_muted"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvTrAgency"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/tsq_dark"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Ligne : Service -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Service"
+                        android:textColor="@color/tsq_muted"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvTrService"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/tsq_dark"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Deux grands chiffres côte à côte -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="14dp"
+                    android:orientation="horizontal">
+
+                    <!-- Case 1 : personnes devant vous -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_pill"
+                        android:backgroundTint="#FAFAFA"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:id="@+id/tvTrAhead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/tsq_dark"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Personnes devant"
+                            android:textColor="@color/tsq_muted"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+
+                    <!-- Case 2 : temps estimé -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_pill"
+                        android:backgroundTint="#FAFAFA"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="12dp">
+
+                        <TextView
+                            android:id="@+id/tvTrTime"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/tsq_dark"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Temps estimé"
+                            android:textColor="@color/tsq_muted"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!--  Progression de la file  -->
+
+                <!-- Ligne : libellé à gauche, pourcentage à droite -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Progression de la file"
+                        android:textColor="@color/tsq_dark"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvTrProgress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#E32636"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <!-- Barre de progression (de 0 à 100) -->
+                <ProgressBar
+                    android:id="@+id/pbTrack"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="9dp"
+                    android:layout_marginTop="10dp"
+                    android:max="100"
+                    android:progressBackgroundTint="#EEEEEE"
+                    android:progressTint="#E32636" />
+
+                <!-- Message qui change selon la position (écrit par le Kotlin) -->
+                <TextView
+                    android:id="@+id/tvTrMessage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/tsq_muted"
+                    android:textSize="12sp" />
+
+                <!-- Bouton gris : aller à la liste des tickets -->
+                <Button
+                    android:id="@+id/btnTrTickets"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="18dp"
+                    android:backgroundTint="#F0F0F0"
+                    android:text="Mes tickets"
+                    android:textColor="@color/tsq_dark" />
+
+                <!-- Bouton rouge : prendre un nouveau ticket -->
+                <Button
+                    android:id="@+id/btnTrNew"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="@color/tsq_red"
+                    android:text="Nouveau ticket"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- ============ CAS B : pas de ticket actif (caché par défaut) ============ -->
+        <LinearLayout
+            android:id="@+id/layoutTrEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Aucun ticket actif"
+                android:textColor="@color/tsq_dark"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Prenez un ticket pour suivre votre position."
+                android:textColor="@color/tsq_muted"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/btnTrEmptyNew"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginTop="14dp"
+                android:backgroundTint="@color/tsq_red"
+                android:text="Prendre un ticket"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

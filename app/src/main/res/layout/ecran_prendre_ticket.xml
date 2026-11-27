@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Page « Prendre un ticket » : un en-tête d'étape, la liste des choix, puis la confirmation -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <!-- Colonne verticale : les éléments sont empilés de haut en bas -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Lien « Retour » : caché à l'étape 1, affiché aux étapes 2 et 3 -->
+        <TextView
+            android:id="@+id/tvBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="← Retour"
+            android:textColor="#E32636"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:visibility="gone" />
+
+        <!-- Petit texte rouge : « ÉTAPE 1 SUR 3 », écrit par le Kotlin -->
+        <TextView
+            android:id="@+id/tvStepLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:letterSpacing="0.1"
+            android:textColor="#E32636"
+            android:textSize="11sp"
+            android:textStyle="bold" />
+
+        <!-- Titre de l'étape : « Choisissez un établissement », écrit par le Kotlin -->
+        <TextView
+            android:id="@+id/tvStepTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/tsq_dark"
+            android:textSize="22sp"
+            android:textStyle="bold" />
+
+        <!-- Sous-titre de l'étape, écrit par le Kotlin -->
+        <TextView
+            android:id="@+id/tvStepSub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/tsq_muted"
+            android:textSize="13sp" />
+
+        <!-- Conteneur VIDE : le code Kotlin y ajoute les choix de l'étape en cours -->
+        <LinearLayout
+            android:id="@+id/choicesContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <!-- ============ Carte de confirmation (cachée jusqu'à la fin) ============ -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardDone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/tsq_line"
+            app:strokeWidth="1dp">
+
+            <!-- Contenu centré horizontalement -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <!-- Message de succès en vert -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="✓ Ticket confirmé"
+                    android:textColor="#15803D"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <!-- Le numéro du ticket en très grand (ex : A-482), écrit par le Kotlin -->
+                <TextView
+                    android:id="@+id/tvDoneNumber"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:textColor="#E32636"
+                    android:textSize="46sp"
+                    android:textStyle="bold" />
+
+                <!-- Les détails du ticket sur plusieurs lignes, écrits par le Kotlin -->
+                <TextView
+                    android:id="@+id/tvDoneInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:lineSpacingExtra="4dp"
+                    android:textColor="@color/tsq_dark"
+                    android:textSize="13sp" />
+
+                <!-- Bouton rouge : aller au suivi du ticket -->
+                <Button
+                    android:id="@+id/btnTrack"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="20dp"
+                    android:backgroundTint="@color/tsq_red"
+                    android:text="Suivre mon ticket"
+                    android:textColor="#FFFFFF" />
+
+                <!-- Bouton gris : prendre un autre ticket -->
+                <Button
+                    android:id="@+id/btnNew"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:backgroundTint="#F0F0F0"
+                    android:text="Nouveau ticket"
+                    android:textColor="@color/tsq_dark" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+</ScrollView>

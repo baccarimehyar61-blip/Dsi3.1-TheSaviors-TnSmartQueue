@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Une ligne d'accès rapide : icône à gauche, titre et sous-titre au milieu, flèche à droite -->
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardBackgroundColor="#FFFFFF"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="0dp"
+    app:strokeColor="@color/tsq_line"
+    app:strokeWidth="1dp">
+
+    <!-- Contenu de la carte : 3 éléments côte à côte, alignés au milieu en hauteur -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="14dp">
+
+        <!-- Pastille rose arrondie qui contient l'icône -->
+        <FrameLayout
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:background="@drawable/bg_pill"
+            android:backgroundTint="#FFF0F1"
+            android:padding="10dp">
+
+            <!-- L'icône (rouge) : l'image est choisie par le code Kotlin -->
+            <ImageView
+                android:id="@+id/ivQuickIcon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="icône"
+                android:tint="@color/tsq_red" />
+        </FrameLayout>
+
+        <!-- Le titre et le sous-titre l'un sous l'autre (weight = 1 : ils prennent la place restante) -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- Titre en gras (ex : « Prendre un ticket »), écrit par le Kotlin -->
+            <TextView
+                android:id="@+id/tvQuickTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/tsq_dark"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <!-- Sous-titre en gris, écrit par le Kotlin -->
+            <TextView
+                android:id="@+id/tvQuickSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/tsq_muted"
+                android:textSize="11sp" />
+        </LinearLayout>
+
+        <!-- Flèche rouge à droite (texte fixe, identique pour toutes les lignes) -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="→"
+            android:textColor="@color/tsq_red"
+            android:textSize="18sp" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

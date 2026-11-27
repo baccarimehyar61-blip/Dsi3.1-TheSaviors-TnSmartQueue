@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Page « Inscription » : tout est dans un ScrollView pour pouvoir défiler -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7F4EE"
+    android:fillViewport="true">
+
+    <!-- Colonne verticale : les éléments sont empilés de haut en bas -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Nom de l'application -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Tunisia Smart Queue"
+            android:textColor="@color/tsq_red"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <!-- Titre de la page -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Inscription"
+            android:textColor="#14181F"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+
+        <!-- Message d'erreur : caché au départ, le texte est écrit par le code Kotlin -->
+        <TextView
+            android:id="@+id/tvError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="#FDECEA"
+            android:padding="12dp"
+            android:textColor="#B42318"
+            android:visibility="gone" />
+
+        <!-- Ligne horizontale : Nom et Prénom côte à côte -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:orientation="horizontal">
+
+            <!-- Champ Nom (moitié gauche) -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:hint="Nom"
+                app:boxStrokeColor="@color/tsq_red"
+                app:hintTextColor="@color/tsq_red">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etNom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName|textCapWords" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Champ Prénom (moitié droite) -->
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:hint="Prénom"
+                app:boxStrokeColor="@color/tsq_red"
+                app:hintTextColor="@color/tsq_red">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPrenom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName|textCapWords" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <!-- Champ e-mail -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilEmail"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="E-mail"
+            app:boxStrokeColor="@color/tsq_red"
+            app:hintTextColor="@color/tsq_red">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Champ téléphone -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPhone"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="Téléphone (ex. 22 123 456)"
+            app:boxStrokeColor="@color/tsq_red"
+            app:hintTextColor="@color/tsq_red">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Champ mot de passe (avec l'icône œil) -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPassword"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="Mot de passe"
+            app:boxStrokeColor="@color/tsq_red"
+            app:endIconMode="password_toggle"
+            app:hintTextColor="@color/tsq_red">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Champ confirmation du mot de passe (avec l'icône œil) -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilConfirm"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="Confirmer le mot de passe"
+            app:boxStrokeColor="@color/tsq_red"
+            app:endIconMode="password_toggle"
+            app:hintTextColor="@color/tsq_red">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etConfirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Bouton de création de compte -->
+        <Button
+            android:id="@+id/btnRegister"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="@color/tsq_red"
+            android:text="Créer mon compte"
+            android:textColor="#FFFFFF" />
+
+        <!-- Lien pour retourner à la page de connexion -->
+        <TextView
+            android:id="@+id/tvLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="Déjà inscrit ? Se connecter"
+            android:textColor="@color/tsq_red" />
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Une ligne de notification : une carte sur laquelle on peut cliquer pour la marquer comme lue -->
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardNotif"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardBackgroundColor="#FFFFFF"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="0dp"
+    app:strokeColor="@color/tsq_line"
+    app:strokeWidth="1dp">
+
+    <!-- Contenu de la carte : le point coloré à gauche, les textes à droite -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <!-- Petit point coloré : sa couleur dépend du type (vert, orange ou bleu), choisie par le Kotlin -->
+        <View
+            android:id="@+id/vDot"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/bg_pill" />
+
+        <!-- Les 3 textes l'un sous l'autre (weight = 1 : ils prennent toute la place restante) -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- Titre en gras (ex : « Ticket confirmé »), écrit par le Kotlin -->
+            <TextView
+                android:id="@+id/tvNTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/tsq_dark"
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
+            <!-- Message de la notification, écrit par le Kotlin -->
+            <TextView
+                android:id="@+id/tvNMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3dp"
+                android:textColor="#555555"
+                android:textSize="12sp" />
+
+            <!-- Date et heure, en petit et en gris, écrites par le Kotlin -->
+            <TextView
+                android:id="@+id/tvNTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:textColor="@color/tsq_muted"
+                android:textSize="11sp" />
+        </LinearLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

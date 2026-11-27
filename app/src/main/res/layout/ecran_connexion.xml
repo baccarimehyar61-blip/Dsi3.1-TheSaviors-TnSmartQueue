@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Page « Connexion » : tout est dans un ScrollView pour pouvoir défiler -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7F4EE"
+    android:fillViewport="true">
+
+    <!-- Colonne verticale : les éléments sont empilés de haut en bas -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <!-- Nom de l'application -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Tunisia Smart Queue"
+            android:textColor="@color/tsq_red"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <!-- Titre de la page -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Connexion"
+            android:textColor="#14181F"
+            android:textSize="32sp"
+            android:textStyle="bold" />
+
+        <!-- Phrase d'explication -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="Connectez-vous pour gérer vos tickets."
+            android:textColor="#667085" />
+
+        <!-- Message d'erreur : caché au départ, le texte est écrit par le code Kotlin -->
+        <TextView
+            android:id="@+id/tvError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="#FDECEA"
+            android:padding="12dp"
+            android:textColor="#B42318"
+            android:visibility="gone" />
+
+        <!-- Champ e-mail : le cadre (tilEmail) affiche les erreurs sous le champ -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilEmail"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:hint="E-mail"
+            app:boxStrokeColor="@color/tsq_red"
+            app:hintTextColor="@color/tsq_red">
+
+            <!-- La zone où l'utilisateur écrit son e-mail -->
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Champ mot de passe : endIconMode ajoute l'icône « œil » pour afficher/cacher -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tilPassword"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:hint="Mot de passe"
+            app:boxStrokeColor="@color/tsq_red"
+            app:endIconMode="password_toggle"
+            app:hintTextColor="@color/tsq_red">
+
+            <!-- La zone où l'utilisateur écrit son mot de passe (caché par des points) -->
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Lien « Mot de passe oublié ? » (ouvre la page de récupération) -->
+        <TextView
+            android:id="@+id/tvForgot"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:padding="4dp"
+            android:text="Mot de passe oublié ?"
+            android:textColor="@color/tsq_red" />
+
+        <!-- Bouton de connexion -->
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/tsq_red"
+            android:text="Se connecter"
+            android:textColor="#FFFFFF" />
+
+        <!-- Lien vers la page d'inscription -->
+        <TextView
+            android:id="@+id/tvRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="Pas de compte ? S'inscrire"
+            android:textColor="@color/tsq_red" />
+    </LinearLayout>
+</ScrollView>

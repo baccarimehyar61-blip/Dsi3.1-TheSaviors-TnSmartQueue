@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Page « Notifications » : un en-tête, puis la liste des notifications -->
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <!-- Colonne verticale : les éléments sont empilés de haut en bas -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Ligne du haut : le titre à gauche, « Tout marquer comme lu » à droite -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <!-- Le titre prend toute la place restante (weight = 1) -->
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Notifications"
+                android:textColor="@color/tsq_dark"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <!-- Lien pour tout marquer comme lu (caché par le Kotlin quand tout est lu) -->
+            <TextView
+                android:id="@+id/tvMarkAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="6dp"
+                android:text="Tout marquer comme lu"
+                android:textColor="#E32636"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- Sous-titre : « 2 non lue(s) » ou « Tout est à jour », écrit par le Kotlin -->
+        <TextView
+            android:id="@+id/tvNSub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/tsq_muted"
+            android:textSize="13sp" />
+
+        <!-- Conteneur VIDE : le code Kotlin y ajoute une carte par notification -->
+        <LinearLayout
+            android:id="@+id/notifContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+
+        <!-- Message affiché quand il n'y a aucune notification (caché par défaut) -->
+        <TextView
+            android:id="@+id/tvNEmpty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="24dp"
+            android:text="Aucune notification."
+            android:textColor="@color/tsq_muted"
+            android:textSize="13sp"
+            android:visibility="gone" />
+    </LinearLayout>
+</ScrollView>
